@@ -1,48 +1,54 @@
+<?php
 
-    <input type = "radio" name = "location1" value = "08">
-        <label for = "location1">Deans Offices</label>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$conn = mysqli_connect($servername, $username, $password, "sh_signin");
 
-    <input type = "radio" name = "location1" value = "17">
-        <label for = "location1">ECR</label>
+//check connection
+if ($conn -> connect_error){
+    die("Connection failed: " . $conn->connect_error);
+}else{
+    echo "connected successfully" . "<br>";
+}
 
-    <input type = "radio" name = "location1" value = "18">
-        <label for = "location1">WCR</label>
+//get location name and availability
+$retrieve_sql = "SELECT * FROM `locations` WHERE `locations_index` = 1";
+$retrieve_send = mysqli_query($conn, $retrieve_sql);
+$retrieve_data = mysqli_fetch_assoc($retrieve_send);
 
-    <input type = "radio" name = "location1" value = "19">
-        <label for = "location1">MH109</label>
+//declare location name and availability array
+$location_name = [];
+$location_ava = [];
 
-    <input type = "radio" name = "location1" value = "20">
-        <label for = "location1">MH110</label>
+foreach ($retrieve_data as $location => $ava){
+    array_push($location_name, $location);//push name and value to array for each of them
+    array_push($location_ava, $ava);
+}
 
-    <input type = "radio" name = "location1" value = "21">
-        <label for = "location1">MH111</label>
+//get value from database
+$value_sql = "SELECT * FROM `locations` WHERE `locations_index` = 2";
+$value_send = mysqli_query($conn, $value_sql);
+$value_data = mysqli_fetch_assoc($value_send);
 
-    <input type = "radio" name = "location1" value = "22">
-        <label for = "location1">South Room</label>
+//declare location value array (for submit)
+$location_value = [];
 
-    <input type = "radio" name = "location1" value = "23">
-        <label for = "location1">MH123</label>
+//push values to array
+foreach($value_data as $name => $value){
+    array_push($location_value, $value);
+}
 
-    <input type = "radio" name = "location1" value = "24">
-        <label for = "location1">MH124</label>
+//depending on value, it will echo different input choices for form
+for ($i = 0; $i < count($location_name); $i++){
+    if($location_ava[$i] == 0){
+        echo "<input type = 'radio' name = 'location1' value = '$location_value[$i]'>";
+        echo "<label for = 'location1'>$location_name[$i]</label>";
+    }else if ($location_ava[$i] == 2){//value of 2, available only in block 1
+        echo "<input type = 'radio' name = 'location1' value = '$location_value[$i]'>";
+        echo "<label for = 'location1'>$location_name[$i]</label>";
+    }
+}
 
-    <input type = "radio" name = "location1" value = "25">
-        <label for = "location1">MH125</label>
 
-    <input type = "radio" name = "location1" value = "26">
-        <label for = "location1">MH126</label>
-
-    <input type = "radio" name = "location1" value = "27">
-        <label for = "location1">MH127</label>
-
-    <input type = "radio" name = "location1" value = "28">
-        <label for = "location1">MH128</label><br>
-
-    <input type = "radio" name = "location1" value = "29">
-        <label for = "location1">MH132</label>
-
-    <input type = "radio" name = "location1" value = "30">
-        <label for = "location1">DSL</label>
-        
-    <input type = "radio" name = "location1" value = "31">
-        <label for = "location1">Science Center</label>
+?>
