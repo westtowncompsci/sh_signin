@@ -1,47 +1,49 @@
-    <input type = "radio" name = "location2" value = "08">
-        <label for = "location2">Deans Offices</label>
+<?php
+//see unavailable_options_block1.php for annotation (same thing except final for loop)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$conn = mysqli_connect($servername, $username, $password, "sh_signin");
 
-    <input type = "radio" name = "location2" value = "17">
-        <label for = "location2">ECR</label>
+//check connection
+if ($conn -> connect_error){
+    die("Connection failed: " . $conn->connect_error);
+}else{
+    echo "connected successfully" . "<br>";
+}
 
-    <input type = "radio" name = "location2" value = "18">
-        <label for = "location2">WCR</label>
+$retrieve_sql = "SELECT * FROM `locations` WHERE `locations_index` = 1";
+$retrieve_send = mysqli_query($conn, $retrieve_sql);
+$retrieve_data = mysqli_fetch_assoc($retrieve_send);
 
-    <input type = "radio" name = "location2" value = "19">
-        <label for = "location2">MH109</label>
+$location_name = [];
+$location_ava = [];
 
-    <input type = "radio" name = "location2" value = "20">
-        <label for = "location2">MH110</label>
+foreach ($retrieve_data as $location => $ava){
+    array_push($location_name, $location);
+    array_push($location_ava, $ava);
+}
 
-    <input type = "radio" name = "location2" value = "21">
-        <label for = "location2">MH111</label>
+$value_sql = "SELECT * FROM `locations` WHERE `locations_index` = 2";
+$value_send = mysqli_query($conn, $value_sql);
+$value_data = mysqli_fetch_assoc($value_send);
 
-    <input type = "radio" name = "location2" value = "22">
-        <label for = "location2">South Room</label>
 
-    <input type = "radio" name = "location2" value = "23">
-        <label for = "location2">MH123</label>
+$location_value = [];
 
-    <input type = "radio" name = "location2" value = "24">
-        <label for = "location2">MH124</label>
+foreach($value_data as $name => $value){
+    array_push($location_value, $value);
+}
 
-    <input type = "radio" name = "location2" value = "25">
-        <label for = "location2">MH125</label>
+for ($i = 0; $i < count($location_name); $i++){
+    if($location_ava[$i] == 0){
+        echo "<input type = 'radio' name = 'location2' value = '$location_value[$i]'>";
+        echo "<label for = 'location2'>$location_name[$i]</label>";
+    }else if ($location_ava[$i] == 3){//value of 3, available only in block 2
+        echo "<input type = 'radio' name = 'location2' value = '$location_value[$i]'>";
+        echo "<label for = 'location2'>$location_name[$i]</label>";
+    }
+}
 
-    <input type = "radio" name = "location2" value = "26">
-        <label for = "location2">MH126</label>
 
-    <input type = "radio" name = "location2" value = "27">
-        <label for = "location2">MH127</label>
-
-    <input type = "radio" name = "location2" value = "28">
-        <label for = "location2">MH128</label><br>
-
-    <input type = "radio" name = "location2" value = "29">
-        <label for = "location2">MH132</label>
-
-    <input type = "radio" name = "location2" value = "30">
-        <label for = "location2">DSL</label>
-        
-    <input type = "radio" name = "location2" value = "31">
-        <label for = "location2">Science Center</label>
+?>
