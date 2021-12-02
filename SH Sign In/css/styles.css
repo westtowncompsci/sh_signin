@@ -1,0 +1,97 @@
+
+body {
+background-color:#7499c1
+}
+
+h1 {
+text-align:center;font-size:29px;
+}
+
+.half1-group {
+display: flex;
+flex-flow: row wrap;
+justify-content:center;
+padding: 15px;
+font-weight:bold;
+text-decoration:none;
+}
+
+.half2-group {
+display: flex;
+flex-flow: row wrap;
+justify-content:center;
+padding: 15px;
+font-weight:bold;
+text-decoration:none;
+}
+
+.confirm-group {
+display: flex;
+flex-flow: row wrap;
+justify-content:center;
+padding: 15px;
+font-weight:bold;
+text-decoration:none;
+}
+
+.final-group {
+display: flex;
+flex-flow: row wrap;
+justify-content:center;
+padding: 15px;
+font-weight:bold;
+text-decoration:none;
+}
+
+.button {
+flex:1 1;
+min-width: 150px;
+max-width: 200px;
+background: whitesmoke;
+border: 3px solid black;
+padding: 5px;
+height: 50px;
+margin-top: 10px;
+color: black;
+font-weight: bold;
+font-size: 20px;
+text-align: center;
+vertical-align: middle;
+margin: 10px;
+font-family:'Times New Roman', Times, serif;
+border-radius: 10px;
+
+display: flex;
+flex-flow: row;
+justify-content:center;
+align-items:center;
+cursor: pointer;
+}
+
+.button.blank-button {
+cursor:auto;
+}
+
+.button.button-special {
+    background-color:greenyellow;
+}
+
+.button.teacher-button {
+    font-size:18px;
+}
+
+.button.edit-button {
+    background-color:lightpink
+}
+
+.button.confirm-button {
+    background-color:lightgreen;
+}
+
+.button-text {
+    flex: 1 1;
+}
+
+a {
+    text-decoration:none
+}
